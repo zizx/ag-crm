@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AG CRM Lead Capture</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="popup">
+      <header>
+        <div>
+          <p>AG CRM</p>
+          <h1>Lead Capture</h1>
+        </div>
+        <span id="statusPill">Ready</span>
+      </header>
+
+      <form id="settingsForm" class="settings">
+        <label>
+          CRM API URL
+          <input id="crmUrl" name="crmUrl" placeholder="http://127.0.0.1:3210" />
+        </label>
+        <div class="site-enable-box">
+          <p id="siteEnableStatus" class="tab-hint">Checking current site…</p>
+          <button id="toggleSiteEnable" type="button" class="secondary full-width">Enable on this site</button>
+        </div>
+        <button id="aiExtractPage" type="button" class="secondary full-width ai-extract-button">
+          ✨ Get all leads (AI) from this page
+        </button>
+        <p class="field-help subtle">
+          Works on any enabled site — AI reads the page and lists every lead for review before saving.
+        </p>
+      </form>
+
+      <p id="message" class="message" role="status"></p>
+
+      <p class="footnote">
+        On any enabled site, use the floating <strong>Save to AG CRM</strong> button to capture a lead manually.
+      </p>
+    </main>
+    <script src="shared/crm-api.js"></script>
+    <script src="shared/site-settings.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

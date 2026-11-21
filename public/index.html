@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AG CRM</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">AG</div>
+          <div>
+            <h1>AG CRM</h1>
+            <p>Agent-ready lead workspace</p>
+          </div>
+        </div>
+        <nav class="nav">
+          <button class="nav-item active" type="button" data-view="contacts">People</button>
+          <button class="nav-item" type="button" data-view="companies">Companies</button>
+        </nav>
+        <div class="system-card">
+          <span class="status-dot"></span>
+          <div>
+            <strong id="healthStatus">Checking</strong>
+            <p id="healthMeta">Local API</p>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <section id="contactsView">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Default Organization</p>
+            <h2>People</h2>
+          </div>
+          <button class="primary-button" id="openLeadForm" type="button">Add Person</button>
+        </header>
+
+        <section class="toolbar" aria-label="People filters">
+          <label class="search-box">
+            <span>Search</span>
+            <input id="searchInput" type="search" placeholder="Name, company, email, phone, tag" />
+          </label>
+          <label class="review-filter">
+            <input id="reviewFilter" type="checkbox" />
+            Needs review only
+          </label>
+          <label class="review-filter">
+            Sort
+            <select id="contactSortSelect">
+              <option value="updated_at">Recently updated</option>
+              <option value="name">Name</option>
+              <option value="city">City</option>
+            </select>
+          </label>
+          <label class="review-filter">
+            <input id="includeDeletedFilter" type="checkbox" />
+            Show archived
+          </label>
+          <button class="secondary-button" id="restoreDeletedContacts" type="button">Restore archived</button>
+          <button class="secondary-button" id="deleteSelectedContacts" type="button" disabled>Delete selected</button>
+          <button class="secondary-button" id="exportSelectedGhl" type="button" disabled>Export to GoHighLevel</button>
+          <label class="review-filter select-all-filter">
+            <input id="selectAllContacts" type="checkbox" />
+            Select all
+          </label>
+          <button class="secondary-button" id="refreshContacts" type="button">Refresh</button>
+        </section>
+
+        <div id="archivedBanner" class="archived-banner hidden" role="status"></div>
+
+        <section class="content-grid">
+          <div class="panel contacts-panel">
+            <div class="panel-header">
+              <h3>Saved People</h3>
+              <span id="contactCount">0</span>
+            </div>
+            <div class="contact-list" id="contactList"></div>
+          </div>
+
+          <div class="panel detail-panel" id="detailPanel">
+            <div class="empty-state">
+              <h3>Select a person</h3>
+              <p>Open a lead to review notes, tasks, tags, source, and activity.</p>
+            </div>
+          </div>
+        </section>
+        </section>
+
+        <section id="companiesView" class="hidden">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Default Organization</p>
+            <h2>Companies</h2>
+          </div>
+        </header>
+
+        <section class="toolbar" aria-label="Company filters">
+          <label class="search-box">
+            <span>Search</span>
+            <input id="companySearchInput" type="search" placeholder="Company name, address, phone, tag" />
+          </label>
+          <label class="review-filter">
+            <input id="companyReviewFilter" type="checkbox" />
+            Needs review only
+          </label>
+          <label class="review-filter">
+            <input id="companyIncludeDeletedFilter" type="checkbox" />
+            Show archived
+          </label>
+          <button class="secondary-button" id="refreshCompanies" type="button">Refresh</button>
+        </section>
+
+        <section class="content-grid">
+          <div class="panel contacts-panel">
+            <div class="panel-header">
+              <h3>Company Profiles</h3>
+              <span id="companyCount">0</span>
+            </div>
+            <div class="contact-list" id="companyList"></div>
+          </div>
+
+          <div class="panel detail-panel" id="companyDetailPanel">
+            <div class="empty-state">
+              <h3>Select a company</h3>
+              <p>Company and firm profiles captured by the extension appear here, separate from people.</p>
+            </div>
+          </div>
+        </section>
+        </section>
+
+      </main>
+    </div>
+
+    <dialog class="modal" id="leadModal">
+      <form id="leadForm" method="dialog">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">Manual person</p>
+            <h3>Add Person</h3>
+          </div>
+          <button class="icon-button" id="closeLeadForm" type="button" aria-label="Close">x</button>
+        </div>
+        <div class="form-grid">
+          <label>
+            Name
+            <input name="name" autocomplete="name" />
+          </label>
+          <label>
+            Company
+            <input name="company_name" autocomplete="organization" />
+          </label>
+          <label>
+            Title
+            <input name="title" autocomplete="organization-title" />
+          </label>
+          <label>
+            City
+            <input name="city" autocomplete="address-level2" />
+          </label>
+          <label>
+            Email
+            <input name="email" type="email" autocomplete="email" />
+          </label>
+          <label>
+            Phone
+            <input name="phone" autocomplete="tel" />
+          </label>
+          <label>
+            Website
+            <input name="website" type="url" placeholder="https://example.com" />
+          </label>
+          <label>
+            Address
+            <input name="address" />
+          </label>
+          <label>
+            Tags
+            <input name="tags" placeholder="prospect, referral, real estate" />
+          </label>
+          <label class="wide">
+            Source URL
+            <input name="source_url" type="url" />
+          </label>
+          <label class="wide">
+            Note
+            <textarea name="note" rows="4"></textarea>
+          </label>
+        </div>
+        <div class="modal-actions">
+          <button class="secondary-button" id="cancelLeadForm" type="button">Cancel</button>
+          <button class="primary-button" type="submit">Save Person</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="modal" id="ghlModal">
+      <form id="ghlForm" method="dialog">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">Integration</p>
+            <h3>Export to GoHighLevel</h3>
+          </div>
+          <button class="icon-button" id="closeGhlForm" type="button" aria-label="Close">x</button>
+        </div>
+        <p id="ghlExportCount" class="ghl-help"></p>
+        <div class="form-grid">
+          <label class="wide">
+            Private Integration Token
+            <input id="ghlTokenInput" autocomplete="off" placeholder="pit-…" />
+          </label>
+          <label class="wide">
+            Sub-account (Location) ID
+            <input id="ghlLocationInput" list="ghlLocationOptions" placeholder="your-location-id" />
+            <datalist id="ghlLocationOptions"></datalist>
+          </label>
+          <label class="wide ghl-remember">
+            <input type="checkbox" id="ghlSaveDefault" checked />
+            Remember token and location for next time
+          </label>
+        </div>
+        <div id="ghlResults" class="ghl-results hidden"></div>
+        <div class="modal-actions">
+          <button class="secondary-button" id="cancelGhlForm" type="button">Close</button>
+          <button class="primary-button" type="submit" id="ghlSubmit">Export</button>
+        </div>
+      </form>
+    </dialog>
+
+    <template id="contactItemTemplate">
+      <div class="contact-item-row">
+        <input class="contact-select" type="checkbox" aria-label="Select contact" />
+        <button class="contact-item" type="button">
+          <span class="contact-avatar"></span>
+          <span class="contact-main">
+            <strong class="contact-name"></strong>
+            <span class="contact-meta"></span>
+          </span>
+          <span class="contact-tags"></span>
+        </button>
+      </div>
+    </template>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

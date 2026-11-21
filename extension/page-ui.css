@@ -1,0 +1,527 @@
+:root {
+  --ag-primary: #176b87;
+  --ag-primary-dark: #0f5268;
+  --ag-surface: #ffffff;
+  --ag-border: #d9e0e8;
+  --ag-text: #18212f;
+  --ag-muted: #667085;
+  --ag-warn-bg: #fff3d9;
+  --ag-warn-text: #7a4a00;
+  --ag-ok-bg: #daf5e3;
+  --ag-ok-text: #16803c;
+  --ag-danger-bg: #ffe1df;
+  --ag-danger-text: #ba2f2f;
+}
+
+#ag-crm-ai-activity {
+  all: initial;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2147483647;
+  padding: 12px 18px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+}
+
+#ag-crm-ai-activity.info {
+  background: #176b87;
+  color: #fff;
+}
+
+#ag-crm-ai-activity.error {
+  background: #ba2f2f;
+  color: #fff;
+}
+
+#ag-crm-ai-activity.hidden {
+  display: none;
+}
+
+#ag-crm-launcher {
+  all: initial;
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2147483646;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+#ag-crm-launcher * {
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+#ag-crm-open-btn {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 12px 16px;
+  background: var(--ag-primary);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  box-shadow: 0 10px 30px rgba(15, 82, 104, 0.28);
+}
+
+#ag-crm-open-btn:hover {
+  background: var(--ag-primary-dark);
+}
+
+#ag-crm-open-btn .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #9fe8ff;
+}
+
+#ag-crm-panel {
+  all: initial;
+  position: fixed;
+  right: 18px;
+  bottom: 72px;
+  width: 360px;
+  max-height: min(78vh, 680px);
+  overflow: auto;
+  z-index: 2147483647;
+  background: var(--ag-surface);
+  color: var(--ag-text);
+  border: 1px solid var(--ag-border);
+  border-radius: 14px;
+  box-shadow: 0 18px 50px rgba(16, 24, 40, 0.18);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+#ag-crm-panel * {
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+#ag-crm-panel .panel-inner {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+}
+
+#ag-crm-panel .panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+#ag-crm-panel .panel-header h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+#ag-crm-panel .panel-header p {
+  margin: 2px 0 0;
+  color: var(--ag-muted);
+  font-size: 12px;
+}
+
+#ag-crm-panel .icon-btn {
+  all: unset;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: var(--ag-muted);
+}
+
+#ag-crm-panel .icon-btn:hover {
+  background: #edf3f6;
+}
+
+#ag-crm-panel .banner {
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+#ag-crm-panel .banner.warn {
+  background: var(--ag-warn-bg);
+  color: var(--ag-warn-text);
+}
+
+#ag-crm-panel .banner.ok {
+  background: var(--ag-ok-bg);
+  color: var(--ag-ok-text);
+}
+
+#ag-crm-panel .banner.hidden {
+  display: none;
+}
+
+#ag-crm-panel label {
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ag-muted);
+}
+
+#ag-crm-panel input,
+#ag-crm-panel textarea {
+  width: 100%;
+  border: 1px solid var(--ag-border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+  color: var(--ag-text);
+  background: #fff;
+}
+
+#ag-crm-panel textarea {
+  resize: vertical;
+  min-height: 64px;
+}
+
+#ag-crm-panel .actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+#ag-crm-panel button.primary,
+#ag-crm-panel button.secondary {
+  all: unset;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+#ag-crm-panel button.primary {
+  background: var(--ag-primary);
+  color: #fff;
+}
+
+#ag-crm-panel button.primary:hover {
+  background: var(--ag-primary-dark);
+}
+
+#ag-crm-panel button.secondary {
+  border: 1px solid var(--ag-border);
+  background: #fff;
+  color: var(--ag-text);
+}
+
+#ag-crm-panel button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#ag-crm-panel .status {
+  min-height: 16px;
+  font-size: 12px;
+  color: var(--ag-muted);
+}
+
+#ag-crm-panel .ai-extract-btn {
+  border-color: #b7a4ee !important;
+  background: #f5f3ff !important;
+  color: #5b21b6 !important;
+}
+
+#ag-crm-panel .ai-extract-btn:hover {
+  background: #ede9fe !important;
+}
+
+#ag-crm-panel .ai-results {
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--ag-border);
+  border-radius: 10px;
+  padding: 10px;
+  background: #fafbfd;
+}
+
+#ag-crm-panel .ai-results.hidden {
+  display: none;
+}
+
+#ag-crm-panel .ai-results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+#ag-crm-panel .ai-results-header strong {
+  font-size: 13px;
+}
+
+#ag-crm-panel .ai-select-all {
+  display: inline-flex !important;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ag-muted);
+}
+
+#ag-crm-panel .ai-select-all input {
+  width: auto;
+}
+
+#ag-crm-panel .ai-list {
+  display: grid;
+  gap: 6px;
+  max-height: 240px;
+  overflow: auto;
+}
+
+#ag-crm-panel .ai-lead {
+  display: grid !important;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+  align-items: start;
+  border: 1px solid var(--ag-border);
+  border-radius: 8px;
+  padding: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+
+#ag-crm-panel .ai-lead input {
+  width: auto;
+  margin-top: 2px;
+}
+
+#ag-crm-panel .ai-lead-body {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+#ag-crm-panel .ai-lead-name {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--ag-text);
+}
+
+#ag-crm-panel .ai-lead-company,
+#ag-crm-panel .ai-lead-meta {
+  font-size: 11px;
+  color: var(--ag-muted);
+  word-break: break-word;
+}
+
+#ag-crm-panel .ai-lead-badges {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #5b21b6;
+}
+
+#ag-crm-panel .ai-lead-result {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+#ag-crm-panel .ai-lead-result.ok {
+  color: var(--ag-ok-text);
+}
+
+#ag-crm-panel .ai-lead-result.error {
+  color: var(--ag-danger-text);
+}
+
+#ag-crm-panel .ai-engine-note {
+  margin: 0;
+  font-size: 11px;
+  color: var(--ag-muted);
+}
+
+#ag-crm-panel .ai-engine-note.recipe {
+  color: var(--ag-ok-text);
+  font-weight: 700;
+}
+
+#ag-crm-panel button.link-like {
+  all: unset;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ag-primary);
+  text-decoration: underline;
+  justify-self: start;
+}
+
+#ag-crm-panel button.link-like:hover {
+  color: var(--ag-primary-dark);
+}
+
+#ag-crm-panel.hidden {
+  display: none;
+}
+
+#ag-crm-capture-toast {
+  all: initial;
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  width: min(380px, calc(100vw - 36px));
+  z-index: 2147483647;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+#ag-crm-capture-toast * {
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+#ag-crm-capture-toast.hidden {
+  display: none;
+}
+
+#ag-crm-capture-toast .toast-inner {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--ag-border);
+  background: var(--ag-surface);
+  color: var(--ag-text);
+  box-shadow: 0 18px 50px rgba(16, 24, 40, 0.18);
+}
+
+#ag-crm-capture-toast.capturing .toast-inner {
+  border-color: #9fd6ea;
+  background: #f4fbff;
+}
+
+#ag-crm-capture-toast.saved .toast-inner {
+  border-color: #9ed9b0;
+}
+
+#ag-crm-capture-toast.error .toast-inner {
+  border-color: #efb4b4;
+  background: #fff7f7;
+}
+
+#ag-crm-capture-toast.notice .toast-inner {
+  border-color: #f0d59a;
+  background: #fffaf0;
+}
+
+#ag-crm-capture-toast.duplicate .toast-inner {
+  border-color: #c4b5fd;
+  background: #f5f3ff;
+}
+
+#ag-crm-capture-toast.duplicate .toast-eyebrow {
+  color: #6d28d9;
+}
+
+#ag-crm-capture-toast .toast-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+#ag-crm-capture-toast .toast-eyebrow {
+  margin: 0 0 2px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ag-primary);
+}
+
+#ag-crm-capture-toast .toast-header strong {
+  display: block;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+#ag-crm-capture-toast .icon-btn {
+  all: unset;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: var(--ag-muted);
+}
+
+#ag-crm-capture-toast .icon-btn:hover {
+  background: #edf3f6;
+}
+
+#ag-crm-capture-toast .toast-summary,
+#ag-crm-capture-toast .toast-hint {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--ag-muted);
+}
+
+#ag-crm-capture-toast .toast-fields {
+  display: grid;
+  gap: 6px;
+}
+
+#ag-crm-capture-toast .toast-field {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 8px;
+  font-size: 12px;
+}
+
+#ag-crm-capture-toast .toast-field span:first-child {
+  color: var(--ag-muted);
+  font-weight: 700;
+}
+
+#ag-crm-capture-toast .toast-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+#ag-crm-capture-toast button.primary,
+#ag-crm-capture-toast button.secondary {
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 9px 10px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+#ag-crm-capture-toast button.primary {
+  background: var(--ag-primary);
+  color: #fff;
+}
+
+#ag-crm-capture-toast button.secondary {
+  border: 1px solid var(--ag-border);
+  background: #fff;
+  color: var(--ag-text);
+}
+
+#ag-crm-capture-toast button:hover {
+  opacity: 0.92;
+}
